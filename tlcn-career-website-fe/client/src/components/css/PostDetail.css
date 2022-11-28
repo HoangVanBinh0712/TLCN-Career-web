@@ -1,0 +1,207 @@
+.cvSubmitted :hover {
+    background-color: rgb(114, 249, 249);
+}
+.gradient-border {
+    padding: 1rem;
+    color: white;
+    border-width: 3px;
+    border-style: solid;
+    border-image: linear-gradient(to bottom, red, rgba(0, 0, 0, 0)) 1 100%;
+}
+/*Css Post Detail*/
+.page-job-detail .page-foreground .wrapper-job-detail-header {
+    background: #fff;
+    padding: 15px 12.5% 0;
+    box-shadow: 0 0.5px 0 rgb(0 0 0 / 10%);
+}
+
+.page-job-detail {
+    position: relative;
+    margin-top: 10px;
+    background-color: #f5f5f5;
+    font-family: Inter, Arial, Nunito, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Noto Sans', sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol',
+        'Noto Color Emoji';
+}
+
+.page-job-detail.page-job-detail_no-background .page-job-detail__header {
+    margin-top: 10px;
+}
+
+.page-job-detail__header {
+    margin-top: 50px;
+}
+
+.page-job-detail .box {
+    box-shadow: unset;
+}
+
+.box-md {
+    padding: 32px;
+}
+
+.box {
+    background: #fff;
+    margin-bottom: 15px;
+    border: 0;
+    box-shadow: 0 0.5px 0 rgb(0 0 0 / 10%);
+}
+
+.page-job-detail__header .box-md {
+    padding: 18px 0;
+    text-align: center;
+    padding-top: 0;
+    padding: 10px 8.5%;
+}
+
+.page-job-detail {
+    position: relative;
+    margin-top: 10px;
+    background-color: #f5f5f5;
+    font-family: Inter, Arial, Nunito, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Noto Sans', sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol',
+        'Noto Color Emoji';
+}
+
+.page-job-detail .job-header-info h1.job-title {
+    margin-top: 0;
+}
+.company-name,
+.page-job-detail__header .salary {
+    display: block;
+    text-transform: capitalize;
+    font-weight: 500;
+}
+
+.page-job-detail__header .company-location {
+    display: block;
+    color: #555;
+}
+
+.col-btn-save-section {
+    margin-top: 12px;
+}
+
+.page-job-detail__header .col-xs-6.col-xs-pull-6,
+.page-job-detail__header .col-xs-6.col-xs-push-6 {
+    opacity: 1;
+    transition: all 0.3s;
+}
+
+.col-xs-push-6 {
+    left: 50%;
+}
+
+.col-xs-6 {
+    width: 50%;
+}
+
+.page-job-detail__header .btn {
+    margin-top: 5px;
+    padding: 10px 0;
+    width: 100%;
+    margin-left: auto;
+    margin-right: auto;
+    font-size: 14px;
+}
+.page-job-detail__header .btn-apply {
+    margin-bottom: 5px;
+    margin-top: 4px;
+    font-size: 18px;
+    padding: 11px 20px;
+}
+
+.page-job-detail__detail {
+    font-size: 14px;
+    padding: 0 8.5%;
+    position: relative;
+}
+
+.page-job-detail__detail .box {
+    padding: 0;
+    background: 0 0;
+    box-shadow: none;
+    margin-bottom: 0;
+}
+
+.page-job-detail .mobile-box {
+    background: #fff;
+    padding: 18px;
+    box-shadow: 0 1px 1px rgb(0 0 0 / 10%);
+    border-radius: 3px;
+    margin-bottom: 15px;
+}
+
+.page-job-detail .box :last-of-type {
+    border-radius: 6px;
+}
+
+.page-job-detail__detail .box-summary .summary-item:first-child {
+    padding-top: 5px;
+}
+
+.page-job-detail__detail .box-summary .summary-item {
+    padding: 12px 0;
+    border-bottom: 1px solid rgba(206, 211, 213, 0.5);
+}
+
+.summary-icon {
+    width: 35px;
+    padding-left: 0;
+    padding-top: 3px;
+}
+.col-xs-2 {
+    width: 16.66666667%;
+}
+
+.summary-content {
+    padding-left: 0;
+    padding-right: 0;
+}
+
+.col-xs-10 {
+    width: 83.33333333%;
+}
+
+.content-label {
+    text-transform: uppercase;
+    color: black;
+    display: block;
+    font-weight: 300;
+    font-size: 15px;
+    font-weight: 400;
+}
+
+.content {
+    font-size: 1em;
+    padding: 0 0 15px;
+}
+
+.icon-date-posted {
+    width: 34px;
+    height: 34px;
+}
+
+.icon {
+    vertical-align: middle;
+    display: inline-block;
+    background: center center no-repeat;
+    background-size: 100%;
+}
+
+.row {
+    --bs-gutter-x: -1, 5rem;
+}
+
+.job-description {
+    margin-bottom: 15px;
+}
+
+.job-description .description {
+    line-height: 21px;
+    word-wrap: break-word;
+}
+
+.job-description .description,
+li {
+    text-align: justify;
+    margin-top: 8px;
+}

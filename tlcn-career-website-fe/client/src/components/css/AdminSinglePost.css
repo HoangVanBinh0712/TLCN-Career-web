@@ -1,0 +1,11 @@
+.admin-post-descriptions {
+    min-height: 90px;
+}
+
+.admin-single-post-button {
+    justify-content: space-around;
+    flex-grow: 0;
+}
+.admin-single-post-button .admin-post-btn {
+    width: auto;
+}

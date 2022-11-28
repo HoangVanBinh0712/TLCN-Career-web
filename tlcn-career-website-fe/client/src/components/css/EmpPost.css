@@ -1,0 +1,45 @@
+.card-emp-post {
+    width: 100%;
+}
+
+.list-posts {
+    max-height: 80%;
+    min-height: 50%;
+    width: 100%;
+    margin-top: 2px;
+}
+
+.emp-post-page {
+    min-height: 525px;
+
+    width: 100%;
+}
+
+.banner {
+    display: flex;
+}
+.banner-buttons {
+    width: 100%;
+
+    margin-top: 10px;
+    justify-content: space-between;
+}
+.banner-button {
+    margin-right: 5px;
+}
+.page-number {
+    width: 100%;
+}
+
+.group-buttons {
+    display: flex;
+    margin-left: 10%;
+    flex-flow: column;
+    height: 100%;
+    justify-content: space-between;
+}
+
+.emp-post-btn {
+    width: 100%;
+    margin-top: 5px;
+}

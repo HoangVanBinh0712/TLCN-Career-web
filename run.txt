@@ -1,0 +1,4 @@
+Run CMD: 
++ java -Dfile.encoding=UTF-8 -jar tlcn-career-website-0.0.1.jar
++ python -m uvicorn app:app --reload
++ Move to client -> npm start

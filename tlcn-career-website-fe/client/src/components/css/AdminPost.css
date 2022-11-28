@@ -1,0 +1,19 @@
+.admin-posts-container {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    min-height: 525px;
+}
+
+.admin-post-banner {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    padding: 5px;
+}
+.admin-post-lable-serach {
+    background: #78c2ad;
+    color: white;
+    border-radius: 10%;
+    margin-left: 6px;
+}

@@ -1,0 +1,80 @@
+package com.be.controller;
+
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
+
+import com.be.payload.BaseResponse;
+import com.be.payload.payment.Order;
+import com.be.service.PaypalService;
+import com.paypal.api.payments.Item;
+import com.paypal.api.payments.Links;
+import com.paypal.api.payments.NameValuePair;
+import com.paypal.api.payments.Payment;
+import com.paypal.api.payments.Transaction;
+import com.paypal.base.rest.PayPalRESTException;
+
+@RestController
+public class PaypalController {
+
+    @Autowired
+    PaypalService service;
+
+    public static final String SUCCESS_URL = "api/pay/success";
+    public static final String CANCEL_URL = "api/pay/cancel";
+
+    @PostMapping("api/pay")
+    public ResponseEntity<?> payment(@RequestParam(value = "orderId", required = true) Long orderId) {
+
+        if (orderId == null)
+            return ResponseEntity.ok(new BaseResponse(false, "Order must not be null !"));
+
+        try {
+            Payment payment = service.createPayment(orderId, "http://localhost:8081/" + CANCEL_URL,
+                    "http://localhost:8081/" + SUCCESS_URL);
+            for (Links link : payment.getLinks()) {
+                if (link.getRel().equals("approval_url")) {
+                    return ResponseEntity.ok(new BaseResponse(true, link.getHref()));
+                }
+            }
+
+        } catch (PayPalRESTException e) {
+
+            e.printStackTrace();
+        }
+        return ResponseEntity.ok(new BaseResponse(false, "There is some thing wrong !"));
+    }
+
+    @GetMapping(CANCEL_URL)
+    public ResponseEntity<?> cancelPay() {
+        return ResponseEntity.ok(new BaseResponse(false, "cancel"));
+    }
+
+    @GetMapping(SUCCESS_URL)
+    public ResponseEntity<?> successPay(@RequestParam("paymentId") String paymentId,
+            @RequestParam("PayerID") String payerId) {
+        try {
+            Payment payment = service.executePayment(paymentId, payerId);
+            if (payment.getState().equals("approved")) {
+                
+                // Do update here
+                return ResponseEntity.ok(service.handleSuccess(payment));
+
+            }
+        } catch (PayPalRESTException e) {
+            System.out.println(e.getMessage());
+        }
+        return ResponseEntity.ok(new BaseResponse(false, "There is some thing wrong !"));
+    }
+}
