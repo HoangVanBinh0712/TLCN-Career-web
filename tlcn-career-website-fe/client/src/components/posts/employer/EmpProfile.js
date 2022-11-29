@@ -67,7 +67,7 @@ const EmpProfile = () => {
                         </h2>
                         <h3>Description </h3>
                         <div className="emp-description">
-                            {data.description.split('\n').map((line) => (
+                            {data.description?.split('\n').map((line) => (
                                 <p>{line}</p>
                             ))}
                         </div>

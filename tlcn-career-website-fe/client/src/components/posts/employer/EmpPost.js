@@ -1,7 +1,6 @@
 import { useContext, useEffect, useState } from 'react'
 import { EmployerPostContext } from '../../../contexts/EmployerPostContext'
 import Row from 'react-bootstrap/Row'
-import Col from 'react-bootstrap/Col'
 import Spiner from 'react-bootstrap/Spinner'
 import Button from 'react-bootstrap/esm/Button'
 import addIcon from '../../../assets/plus-circle-fill.svg'

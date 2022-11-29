@@ -1,4 +1,4 @@
-package com.be.dto;
+package com.be.dto.list;
 
 import java.util.Date;
 
@@ -7,9 +7,14 @@ import com.be.utility.datatype.EStatus;
 
 import lombok.Data;
 
+/*
+ * Use when get a list of Post
+ * We dont really need to map all attributes of Post -> PostDTO because it will query more sql to db
+ * 
+ * 
+ */
 @Data
-public class PostDTO {
-
+public class PostsDTO {
 	private Long id;
 
 	private String title;
@@ -30,20 +35,8 @@ public class PostDTO {
 
 	private Date expirationDate;
 
-	private String adminAceptedEmail;
-
 	private Date acceptedDate;
 
-	private EmployerDTO employer;
-
-	private String city;
-
-	private String field;
-
-	private String avatar;
-
 	private EStatus status;
-
-	private ServiceDTO service;
 
 }

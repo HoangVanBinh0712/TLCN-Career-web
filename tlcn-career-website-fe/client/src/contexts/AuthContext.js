@@ -28,6 +28,7 @@ const AuthContextProvider = ({ children }) => {
             SetAuthToken(localStorage[LOCAL_STORAGE_TOKEN_NAME])
         }
         try {
+            console.count('Call')
             const recentToken = localStorage[LOCAL_STORAGE_TOKEN_NAME]
             if (recentToken !== undefined) {
                 const response = await axios.get(`${apiUrl}/${user}`, {

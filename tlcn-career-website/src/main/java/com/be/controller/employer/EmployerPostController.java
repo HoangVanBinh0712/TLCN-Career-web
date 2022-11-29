@@ -26,7 +26,7 @@ import com.be.payload.post.PostCreateRequest;
 import com.be.payload.post.PostCreateRequestTool;
 import com.be.payload.post.PostRenewRequest;
 import com.be.payload.post.PostUpdateRequest;
-import com.be.service.AdminPostService;
+import com.be.service.PostSearchService;
 import com.be.service.PostService;
 import com.be.service.auth.EmployerDetails;
 import com.be.utility.ModelSorting;
@@ -41,7 +41,7 @@ public class EmployerPostController {
 	PostService postService;
 
 	@Autowired
-	AdminPostService adminPostService;
+	PostSearchService postSearchService;
 
 	@PostMapping(consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
 	public ResponseEntity<?> createPost(@AuthenticationPrincipal EmployerDetails emp,
@@ -84,19 +84,20 @@ public class EmployerPostController {
 			@RequestParam(name = "fieldId", required = false) Long fieldId,
 			@RequestParam(name = "cityId", required = false) Long cityId,
 			@RequestParam(name = "status", required = false) EStatus status,
-			@RequestParam(name = "expirationDate", required = false) @DateTimeFormat(pattern="yyyy-MM-dd") Date expirationDate,
-			@RequestParam(name = "startDate", required = false) @DateTimeFormat(pattern="yyyy-MM-dd") Date startDate,
+			@RequestParam(name = "expirationDate", required = false) @DateTimeFormat(pattern = "yyyy-MM-dd") Date expirationDate,
+			@RequestParam(name = "startDate", required = false) @DateTimeFormat(pattern = "yyyy-MM-dd") Date startDate,
 			@RequestParam(name = "serviceId", required = false) Long serviceId,
 			@RequestParam(name = "page", required = false) Integer page,
 			@RequestParam(name = "limit", required = false) Integer limit,
 			@RequestParam(required = false) Integer sortBy,
 			@RequestParam(required = false) Boolean sortDescending) throws ParseException {
 
-		Long count = adminPostService.getCountBeforSearch(keyword, recruit, salary, eSalary, emp.getId(), fieldId,
-				cityId, status, expirationDate,startDate,serviceId);
+		Long count = postSearchService.getCountBeforSearch(keyword, recruit, salary, eSalary, emp.getId(), fieldId,
+				cityId, status, expirationDate, startDate, serviceId);
 
-		return ResponseEntity.ok(adminPostService.search(keyword, recruit, salary, eSalary, emp.getId(), fieldId,
-				cityId, status, expirationDate,startDate,serviceId, new Page(page, limit, count.intValue(),ModelSorting.getPostSort(sortBy, sortDescending))));
+		return ResponseEntity.ok(postSearchService.search(keyword, recruit, salary, eSalary, emp.getId(), fieldId,
+				cityId, status, expirationDate, startDate, serviceId,
+				new Page(page, limit, count.intValue(), ModelSorting.getPostSort(sortBy, sortDescending))));
 	}
 
 	@GetMapping("{postId}")

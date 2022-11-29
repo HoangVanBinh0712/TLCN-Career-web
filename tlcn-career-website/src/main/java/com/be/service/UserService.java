@@ -6,6 +6,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.be.dto.ProfileDTO;
 import com.be.dto.UserDTO;
+import com.be.dto.loaduser.LoadUserDTO;
 import com.be.payload.BaseResponse;
 import com.be.payload.DataResponse;
 import com.be.payload.ListWithPagingResponse;
@@ -22,6 +23,8 @@ public interface UserService {
 	DataResponse<UserDTO> update(Long userId,UserProfileUpdateRequest request, MultipartFile avatar);
 
 	UserDTO getUserProfile(String email);
+
+	LoadUserDTO getLoadUser(String email);
 
 	BaseResponse uploadCV(String email, MultipartFile cv, Boolean isDefault, String name);
 

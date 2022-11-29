@@ -8,7 +8,7 @@ import lombok.Setter;
 public class JwtResponse<T> extends BaseResponse {
 	private String token;
 	private String refreshToken;
-	private static final String type = "Bearer";
+	// private static final String type = "Bearer";
 	private T userInfo;
 
 	public JwtResponse(String token, String refreshToken, T userInfo) {

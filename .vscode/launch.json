@@ -1,14 +1,15 @@
 {
-    "configurations": [
-        {
-            "type": "java",
-            "name": "Spring Boot-TLCNCareerWebsiteApplication<tlcn-career-website>",
-            "request": "launch",
-            "cwd": "${workspaceFolder}",
-            "mainClass": "com.be.TLCNCareerWebsiteApplication",
-            "projectName": "tlcn-career-website",
-            "args": "",
-            "envFile": "${workspaceFolder}/.env"
-        }
-    ]
+  "configurations": [
+    {
+      "type": "java",
+      "name": "Spring Boot-TLCNCareerWebsiteApplication<tlcn-career-website>",
+      "request": "launch",
+      "cwd": "${workspaceFolder}",
+      "mainClass": "com.be.TLCNCareerWebsiteApplication",
+      "projectName": "tlcn-career-website",
+      "args": "",
+      "envFile": "${workspaceFolder}/.env",
+      "vmArgs": "-Dfile.encoding=utf8"
+    }
+  ]
 }

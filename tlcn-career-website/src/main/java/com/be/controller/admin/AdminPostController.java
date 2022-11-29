@@ -1,7 +1,6 @@
 package com.be.controller.admin;
 
 import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.Date;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.be.service.AdminPostService;
+import com.be.service.PostSearchService;
 import com.be.service.auth.AdminDetails;
 import com.be.utility.ModelSorting;
 import com.be.utility.Page;
@@ -28,6 +28,9 @@ public class AdminPostController {
 
 	@Autowired
 	AdminPostService adminPostService;
+
+	@Autowired
+	PostSearchService postSearchService;
 
 	@GetMapping("{postId}")
 	public ResponseEntity<?> getDetail(@PathVariable("postId") Long postId) {
@@ -51,10 +54,10 @@ public class AdminPostController {
 			@RequestParam(required = false) Integer sortBy,
 			@RequestParam(required = false) Boolean sortDescending) throws ParseException {
 
-		Long count = adminPostService.getCountBeforSearch(keyword, recruit, salary, eSalary, authorId, fieldId, cityId,
+		Long count = postSearchService.getCountBeforSearch(keyword, recruit, salary, eSalary, authorId, fieldId, cityId,
 				status, expirationDate, startDate, serviceId);
 
-		return ResponseEntity.ok(adminPostService.search(keyword, recruit, salary, eSalary, authorId, fieldId, cityId,
+		return ResponseEntity.ok(postSearchService.search(keyword, recruit, salary, eSalary, authorId, fieldId, cityId,
 				status, expirationDate, startDate, serviceId,
 				new Page(page, limit, count.intValue(), ModelSorting.getPostSort(sortBy, sortDescending))));
 	}

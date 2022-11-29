@@ -13,7 +13,8 @@ const NavbarMenu = () => {
         logoutSection,
     } = useContext(AuthContext)
 
-    const logout = () => {
+    const logout = (e) => {
+        e.preventDefault()
         let replaceUrl = ''
         if (isUser) replaceUrl = '/user/'
         else if (isEmployer) replaceUrl = '/employer/'
@@ -41,7 +42,13 @@ const NavbarMenu = () => {
                     <Nav.Link className="font-weigth-border link-to-dashboard-20" to="/employer/login" as={Link}>
                         EMPLOYER
                     </Nav.Link>
-                    <Button variant="secondary" className="font-weigth-border text-white" onClick={logout}>
+                    <Button
+                        variant="secondary"
+                        className="font-weigth-border text-white"
+                        onClick={(e) => {
+                            logout(e)
+                        }}
+                    >
                         <img src={logoutIcon} alt="img" width="32" height="32" className="mr-2" />
                         Logout
                     </Button>
@@ -66,7 +73,13 @@ const NavbarMenu = () => {
                     <Nav.Link className="font-weigth-border link-to-dashboard-20" to="/user/login" as={Link}>
                         Employee
                     </Nav.Link>
-                    <Button variant="secondary" className="font-weigth-border text-white" onClick={logout}>
+                    <Button
+                        variant="secondary"
+                        className="font-weigth-border text-white"
+                        onClick={(e) => {
+                            logout(e)
+                        }}
+                    >
                         <img src={logoutIcon} alt="img" width="32" height="32" className="mr-2" />
                         Logout
                     </Button>
@@ -86,6 +99,16 @@ const NavbarMenu = () => {
                     <Nav.Link className="font-weigth-border link-to-dashboard-20" to="/admin/posts?page=1&limit=9&status=ACTIVE" as={Link}>
                         Job Manage
                     </Nav.Link>
+                    <Button
+                        variant="secondary"
+                        className="font-weigth-border text-white"
+                        onClick={(e) => {
+                            logout(e)
+                        }}
+                    >
+                        <img src={logoutIcon} alt="img" width="32" height="32" className="mr-2" />
+                        Logout
+                    </Button>
                 </Nav>
             </Navbar.Collapse>
         )

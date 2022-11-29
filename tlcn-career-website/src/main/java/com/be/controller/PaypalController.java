@@ -1,28 +1,16 @@
 package com.be.controller;
 
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.be.payload.BaseResponse;
-import com.be.payload.payment.Order;
 import com.be.service.PaypalService;
-import com.paypal.api.payments.Item;
 import com.paypal.api.payments.Links;
-import com.paypal.api.payments.NameValuePair;
 import com.paypal.api.payments.Payment;
-import com.paypal.api.payments.Transaction;
 import com.paypal.base.rest.PayPalRESTException;
 
 @RestController
@@ -67,7 +55,7 @@ public class PaypalController {
         try {
             Payment payment = service.executePayment(paymentId, payerId);
             if (payment.getState().equals("approved")) {
-                
+
                 // Do update here
                 return ResponseEntity.ok(service.handleSuccess(payment));
 

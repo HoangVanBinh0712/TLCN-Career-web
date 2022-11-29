@@ -101,28 +101,30 @@ public class CVPredictServiceImpl implements CVPredictService {
 				jobOptionResponses.add(new JobOptionResponse(lstField.get(i).getCode(), lstField.get(i).getName(),
 						dict.get(lstField.get(i).getCode())));
 
-			Field field = null;
+			Long fieldId = null;
+			String fieldName = "";
 			for (Field fi : lstField)
 				if (fi.getCode().equals(highestPercent)) {
-					field = fi;
+					fieldId = fi.getId();
+					fieldName = fi.getName();
 					break;
 				}
 
 			int count = postRepository
-					.adminCountBeforeSearch(null, null, null, null, null, field.getId(), null, EStatus.ACTIVE, null,
+					.adminCountBeforeSearch(null, null, null, null, null, fieldId, null, EStatus.ACTIVE, null,
 							null, null)
 					.intValue();
 
 			Page page = new Page(null, null, count);
 
 			List<PostDTO> posts = postRepository
-					.adminSearch(null, null, null, null, null, field.getId(), null, EStatus.ACTIVE, null, null, null,
+					.adminSearch(null, null, null, null, null, fieldId, null, EStatus.ACTIVE, null, null, null,
 							page)
 					.stream()
 					.map(p -> modelMapper.map(p, PostDTO.class)).toList();
 
 			return new CVPredictResponse<>(page.getPageNumber() + 1, page.getTotalPage(), posts, jobOptionResponses,
-					field.getName());
+					fieldName);
 
 		} catch (Exception e) {
 			throw new CommonRuntimeException("Can not predict the cv please upload other cv !");
@@ -137,13 +139,14 @@ public class CVPredictServiceImpl implements CVPredictService {
 			throw new CommonRuntimeException("Field not found with code : " + code);
 		Field field = optField.get();
 
-		int count = postRepository.adminCountBeforeSearch(null, null, null, null, null, field.getId(), null, null,null,null, null)
+		int count = postRepository
+				.adminCountBeforeSearch(null, null, null, null, null, field.getId(), null, null, null, null, null)
 				.intValue();
 
 		Page page = new Page(pageNumber, limit, count);
 
 		List<PostDTO> posts = postRepository
-				.adminSearch(null, null, null, null, null, field.getId(), null, null,null,null, null, page).stream()
+				.adminSearch(null, null, null, null, null, field.getId(), null, null, null, null, null, page).stream()
 				.map(p -> modelMapper.map(p, PostDTO.class)).toList();
 
 		return new ListWithPagingResponse<>(page.getPageNumber() + 1, page.getTotalPage(), page.getPageSize(), posts);

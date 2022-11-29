@@ -1,7 +1,6 @@
 package com.be.payload.statistic;
 
-import com.be.utility.datatype.ECurrency;
-import com.be.utility.datatype.EROrderStatus;
+
 
 import lombok.AllArgsConstructor;
 import lombok.Data;

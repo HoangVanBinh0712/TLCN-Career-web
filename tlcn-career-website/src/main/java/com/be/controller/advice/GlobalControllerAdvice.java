@@ -60,7 +60,7 @@ public class GlobalControllerAdvice {
 	}
 
 	@ExceptionHandler(IOException.class)
-	@ResponseStatus(HttpStatus.BAD_REQUEST)
+	@ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
 	public BaseResponse IOExceptionHandler(IOException ex) {
 		return new BaseResponse(false, ex.getMessage());
 	}

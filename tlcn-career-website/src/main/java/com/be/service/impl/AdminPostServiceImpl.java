@@ -1,15 +1,12 @@
 package com.be.service.impl;
 
 import java.math.BigInteger;
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
-import java.util.Map;
 import java.util.Optional;
 
 import javax.persistence.Tuple;
 
-import org.javatuples.Triplet;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -20,7 +17,6 @@ import com.be.model.Admin;
 import com.be.model.Post;
 import com.be.payload.BaseResponse;
 import com.be.payload.DataResponse;
-import com.be.payload.ListWithPagingResponse;
 import com.be.payload.statistic.CountPaidPostByYear;
 import com.be.payload.statistic.CountTotalByService;
 import com.be.payload.statistic.StatisticResponse;
@@ -29,11 +25,8 @@ import com.be.payload.statistic.SumTotalByYearMonthCurrencyStatus;
 import com.be.repository.AdminRepository;
 import com.be.repository.PostRepository;
 import com.be.service.AdminPostService;
-import com.be.utility.Page;
 import com.be.utility.datatype.EROrderStatus;
-import com.be.utility.datatype.ESalary;
 import com.be.utility.datatype.EStatus;
-import com.paypal.api.payments.Currency;
 
 @Service
 public class AdminPostServiceImpl implements AdminPostService {
@@ -79,25 +72,6 @@ public class AdminPostServiceImpl implements AdminPostService {
 		if (optPost.isEmpty())
 			throw new CommonRuntimeException("Post not found with id: " + postId);
 		return new DataResponse<>(true, "", modelMapper.map(optPost.get(), PostDTO.class));
-	}
-
-	@Override
-	public Long getCountBeforSearch(String keyword, Long recruit, Long salary, ESalary eSalary, Long authorId,
-			Long fieldId, Long cityId, EStatus status, Date expirationDate, Date startDate, Long serviceId) {
-		return postRepository.adminCountBeforeSearch(keyword, recruit, salary, eSalary, authorId, fieldId, cityId,
-				status, expirationDate, startDate, serviceId);
-	}
-
-	@Override
-	public ListWithPagingResponse<PostDTO> search(String keyword, Long recruit, Long salary, ESalary eSalary,
-			Long authorId,
-			Long fieldId, Long cityId, EStatus status, Date expirationDate, Date startDate, Long serviceId, Page page) {
-
-		return new ListWithPagingResponse<>(page.getPageNumber() + 1, page.getTotalPage(), page.getPageSize(),
-				postRepository
-						.adminSearch(keyword, recruit, salary, eSalary, authorId, fieldId, cityId, status,
-								expirationDate, startDate, serviceId, page)
-						.stream().map(p -> modelMapper.map(p, PostDTO.class)).toList());
 	}
 
 	@Override

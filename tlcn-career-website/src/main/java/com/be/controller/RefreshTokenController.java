@@ -12,7 +12,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.be.utility.jwt.JwtUtils;
-import com.google.gson.Gson;
 
 @RequestMapping("api/refreshtoken")
 @RestController

@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.be.service.AdminPostService;
+import com.be.service.PostSearchService;
 import com.be.service.PostService;
 import com.be.utility.ModelSorting;
 import com.be.utility.Page;
@@ -26,7 +26,7 @@ public class PostController {
 	PostService postService;
 
 	@Autowired
-	AdminPostService adminPostService;
+	PostSearchService postSearchService;
 
 	@GetMapping("/{postId}")
 	public ResponseEntity<?> getPostDetail(@PathVariable("postId") Long postId) {
@@ -50,11 +50,12 @@ public class PostController {
 			@RequestParam(required = false) Boolean sortDescending)
 			throws ParseException {
 
-		Long count = adminPostService.getCountBeforSearch(keyword, recruit, salary, eSalary, authorId, fieldId, cityId,
+		Long count = postSearchService.getCountBeforSearch(keyword, recruit, salary, eSalary, authorId, fieldId, cityId,
 				null, expirationDate, startDate, serviceId);
 
-		return ResponseEntity.ok(adminPostService.search(keyword, recruit, salary, eSalary, authorId, fieldId,
-				cityId, null, expirationDate, startDate, serviceId, new Page(page, limit, count.intValue(), ModelSorting.getPostSort(sortBy, sortDescending))));
+		return ResponseEntity.ok(postSearchService.search(keyword, recruit, salary, eSalary, authorId, fieldId,
+				cityId, null, expirationDate, startDate, serviceId,
+				new Page(page, limit, count.intValue(), ModelSorting.getPostSort(sortBy, sortDescending))));
 	}
 
 }

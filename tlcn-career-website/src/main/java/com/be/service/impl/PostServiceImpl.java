@@ -328,7 +328,7 @@ public class PostServiceImpl implements PostService {
 			LocalDate localDate2 = post.getStartDate().toInstant()
 					.atZone(ZoneId.systemDefault())
 					.toLocalDate();
-			System.out.println(!localDate1.isEqual(localDate2));
+			// System.out.println(!localDate1.isEqual(localDate2));
 			if (request.getStartDate() != null && !localDate1.isEqual(localDate2))
 				if (post.getStartDate().after(today) && request.getStartDate().after(today)
 						&& post.getStartDate().after(request.getStartDate())) {
@@ -347,7 +347,7 @@ public class PostServiceImpl implements PostService {
 		if (avatar != null)
 			try {
 				if (post.getAvatar() != null && !mediaResourceService.delete(post.getAvatar().getId()))
-					throw new CommonRuntimeException("Error occur when deleting avatar please try again !");
+					throw new CommonRuntimeException("Error occur when deleting avatar please try again!");
 				MediaResource mr = mediaResourceService.save(avatar.getBytes());
 				post.setAvatar(mr);
 

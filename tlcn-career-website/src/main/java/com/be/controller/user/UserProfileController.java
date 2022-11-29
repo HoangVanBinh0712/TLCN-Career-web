@@ -39,8 +39,13 @@ public class UserProfileController {
 	}
 
 	@GetMapping
-	public ResponseEntity<?> getUserInformation(@AuthenticationPrincipal UserDetails user) {		
+	public ResponseEntity<?> getUserInformation(@AuthenticationPrincipal UserDetails user) {
 		return ResponseEntity.ok(userService.getUserProfile(user.getEmail()));
+	}
+
+	@GetMapping("loaduser")
+	public ResponseEntity<?> getLoadUser(@AuthenticationPrincipal UserDetails user) {
+		return ResponseEntity.ok(userService.getLoadUser(user.getEmail()));
 	}
 
 	@PutMapping(value = "/password")
@@ -53,7 +58,7 @@ public class UserProfileController {
 	public ResponseEntity<?> uploadCV(@AuthenticationPrincipal UserDetails user,
 			@RequestPart(name = "CV") MultipartFile cv, @RequestPart(name = "name") String name,
 			@RequestPart(name = "isDefault") Boolean isDefault) {
-		if (!cv.getContentType().equals(MediaType.APPLICATION_PDF_VALUE))
+		if (cv.isEmpty() || !cv.getContentType().equals(MediaType.APPLICATION_PDF_VALUE))
 			return ResponseEntity.ok(new BaseResponse(false, "Allow only pdf file !"));
 		return ResponseEntity.ok(userService.uploadCV(user.getEmail(), cv, isDefault, name));
 	}

@@ -114,6 +114,6 @@ public class SendEmailServiceImpl implements SendEmailService {
 			throw new CommonRuntimeException(String.format("Send verify code failed (%s)", e.getMessage()));
 		}
 
-		return new BaseResponse(true, "Send code success fully ! Check your email to recieve code.");
+		return new BaseResponse(true, "Send code successfully ! Check your email to recieve code.");
 	}
 }

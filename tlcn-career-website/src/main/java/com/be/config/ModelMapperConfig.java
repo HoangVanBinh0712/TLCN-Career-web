@@ -25,8 +25,10 @@ public class ModelMapperConfig {
 		modelMapper.getConfiguration().setMatchingStrategy(MatchingStrategies.STRICT);
 
 		modelMapper.createTypeMap(Employer.class, EmployerDTO.class).addMappings(mapper -> {
-	//		mapper.map(src -> src.getField().getName(), (dst, value) -> dst.setFieldName((String) value));
-//			mapper.map(src -> src.getCity().getName(), (dst, value) -> dst.setCity((String) value));
+			// mapper.map(src -> src.getField().getName(), (dst, value) ->
+			// dst.setFieldName((String) value));
+			// mapper.map(src -> src.getCity().getName(), (dst, value) ->
+			// dst.setCity((String) value));
 			mapper.map(src -> src.getAvatar().getUrl(), (dst, value) -> dst.setAvatar((String) value));
 
 		});
@@ -44,7 +46,6 @@ public class ModelMapperConfig {
 			mapper.map(src -> src.getCity().getName(), (dst, value) -> dst.setCity((String) value));
 			mapper.map(src -> src.getField().getName(), (dst, value) -> dst.setField((String) value));
 			mapper.map(src -> src.getAcceptedBy().getEmail(), (dst, value) -> dst.setAdminAceptedEmail((String) value));
-
 		});
 
 		modelMapper.createTypeMap(CVSubmit.class, CVSubmitDTO.class).addMappings(mapper -> mapper

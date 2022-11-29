@@ -58,7 +58,7 @@ const EmpPostDetail = () => {
             </div>
         )
     }
-    if (post === null || !isEmployer || user.id != post.employer.id) {
+    if (post === null || !isEmployer || user.id !== post.employer.id) {
         postDetail = <NoPostFound />
     } else {
         postHeader = (

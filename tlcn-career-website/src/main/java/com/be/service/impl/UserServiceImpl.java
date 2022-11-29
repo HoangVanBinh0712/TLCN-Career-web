@@ -18,6 +18,7 @@ import com.be.dto.CVSubmitDTO;
 import com.be.dto.PostDTO;
 import com.be.dto.ProfileDTO;
 import com.be.dto.UserDTO;
+import com.be.dto.loaduser.LoadUserDTO;
 import com.be.model.CVSubmit;
 import com.be.model.City;
 import com.be.model.MediaResource;
@@ -337,6 +338,15 @@ public class UserServiceImpl implements UserService {
 		mediaResourceService.delete(mediaId);
 
 		return new BaseResponse(true, "Delete cv successfully !");
+	}
+
+	@Override
+	public LoadUserDTO getLoadUser(String email) {
+		Optional<User> optUser = userRepo.findByEmail(email);
+		if (optUser.isEmpty())
+			throw new CommonRuntimeException("User not found with Email: " + email);
+
+		return modelMapper.map(optUser.get(), LoadUserDTO.class);
 	}
 
 }

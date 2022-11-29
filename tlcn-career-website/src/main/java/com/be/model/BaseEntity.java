@@ -29,7 +29,7 @@ public abstract class BaseEntity {
 	@JoinColumn(name = "city_id")
 	private City city;
 
-	@OneToOne
+	@OneToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "avatar_id")
 	private MediaResource avatar;
 
