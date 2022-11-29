@@ -3,11 +3,12 @@ import Navbar from 'react-bootstrap/Navbar'
 import Nav from 'react-bootstrap/Nav'
 import logoutIcon from '../../assets/people-icon.png'
 import Button from 'react-bootstrap/esm/Button'
-import { Link } from 'react-router-dom'
+import { Link, useHistory } from 'react-router-dom'
 import { useContext } from 'react'
 import { AuthContext } from '../../contexts/AuthContext'
 
 const NavbarMenu = () => {
+    const history = useHistory()
     const {
         authState: { user, isAuthenticated, isUser, isEmployer, isAdmin },
         logoutSection,
@@ -20,7 +21,7 @@ const NavbarMenu = () => {
         else if (isEmployer) replaceUrl = '/employer/'
         else if (isAdmin) replaceUrl = '/admin/'
 
-        window.location.replace(replaceUrl + 'login')
+        history.push(replaceUrl + 'login')
 
         logoutSection()
     }

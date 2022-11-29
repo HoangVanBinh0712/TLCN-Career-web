@@ -148,6 +148,7 @@ const AuthContextProvider = ({ children }) => {
     const logoutSection = () => {
         localStorage.removeItem(LOCAL_STORAGE_TOKEN_NAME)
         localStorage.removeItem(REFRESH_TOKEN)
+        localStorage.removeItem(USER_ROLE)
 
         dispatch({
             type: 'SET_AUTH',
