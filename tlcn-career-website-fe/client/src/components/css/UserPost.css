@@ -4,4 +4,53 @@
 
 .user-post-container {
     min-height: 425px;
+    background: rgb(239, 239, 239);
+}
+.hot-post-container {
+    margin: 0px 10% 20px 10%;
+    background-color: white;
+    border-top-left-radius: 20px;
+    border-top-right-radius: 20px;
+    padding: 10px;
+}
+.normal-post-container {
+    margin: 10px 10% 0 10%;
+
+    background-color: white;
+    border-top-left-radius: 20px;
+    border-top-right-radius: 20px;
+
+    padding: 10px;
+}
+
+.hot-job-text {
+    width: 100%;
+    font-size: 32px;
+    padding: 10px;
+    font-weight: 700;
+}
+
+.hot-job-container {
+    border: none;
+}
+
+.hot-job-card {
+    width: 100%;
+}
+.hot-job-card:hover {
+    cursor: pointer;
+}
+.hot-job-title {
+    text-decoration: none;
+    color: #52dfff;
+}
+.user-border-post {
+    border: 3px solid;
+    border-image-slice: 1;
+    border-image-source: linear-gradient(to right, #83d475, #abe098, #c5e8b7);
+}
+.hot-job-border-post {
+    border: 3px solid;
+    border-image-slice: 1;
+    border-image-source: linear-gradient(to right, #52dfff, #6cd8f0, rgb(185, 242, 255));
 }

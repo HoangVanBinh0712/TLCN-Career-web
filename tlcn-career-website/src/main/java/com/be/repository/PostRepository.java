@@ -4,6 +4,7 @@ import java.util.List;
 
 import javax.persistence.Tuple;
 
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
@@ -16,6 +17,9 @@ import com.be.utility.datatype.EROrderStatus;
 
 @Repository
 public interface PostRepository extends JpaRepository<Post, Long>, PostSearchCustomRepository {
+
+    @Query(value = "Select * from post where service_id in (:arr)", nativeQuery = true)
+    List<Post> getJobByArrService(@Param("arr") List<Long> arr, Pageable page);
 
     @Query(value = "select new com.be.payload.statistic.CountPaidPostByYear(year(p.paidDate), month(p.paidDate) ,count(*)) from PostOrder p where p.status = :status group by year(p.paidDate), month(p.paidDate)")
     List<CountPaidPostByYear> getCountPaidOrderGroupByMonth(@Param("status") EROrderStatus status);

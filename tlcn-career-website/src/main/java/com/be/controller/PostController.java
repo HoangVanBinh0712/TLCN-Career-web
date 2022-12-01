@@ -33,6 +33,13 @@ public class PostController {
 		return ResponseEntity.ok(postService.getDetail(postId));
 	}
 
+	@GetMapping("hot-job")
+	public ResponseEntity<?> getHotJob(@RequestParam(name = "page", required = false) Integer page,
+			@RequestParam(name = "limit", required = false) Integer limit) {
+
+		return ResponseEntity.ok(postSearchService.getHotJob(page, limit));
+	}
+
 	@GetMapping
 	public ResponseEntity<?> getPost(@RequestParam(name = "keyword", required = false) String keyword,
 			@RequestParam(name = "recruit", required = false) Long recruit,

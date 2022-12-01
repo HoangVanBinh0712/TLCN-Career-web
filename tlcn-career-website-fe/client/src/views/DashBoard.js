@@ -15,8 +15,8 @@ import NoPostFound from '../components/NoPostFound'
 import axios from 'axios'
 import { DEFAULT_PAGE_POSTS } from '../contexts/constants'
 import * as queryString from 'query-string'
-import { useHistory } from 'react-router-dom'
 import '../components/css/UserPost.css'
+import SingleHotJob from '../components/posts/SingleHotJob'
 
 const DashBoard = () => {
     let params = queryString.parse(window.location.search)
@@ -31,7 +31,7 @@ const DashBoard = () => {
         field: '',
         city: '',
     })
-
+    const [hotJob, setHotJob] = useState([])
     const [url, setUrl] = useState(window.location)
 
     const [changeLimit, setChangeLimit] = useState(DEFAULT_PAGE_POSTS)
@@ -74,9 +74,21 @@ const DashBoard = () => {
                 setCities(response.data.data)
             }
         }
+        const getHotJob = async () => {
+            const page = Math.round(Math.random(20) * 10)
+            const response = await axios.get(`${apiUrl}/post/hot-job?page=${page}&limit=9`)
+            if (response.data.success) {
+                setHotJob(response.data.data)
+            }
+        }
+        const intervalId = setInterval(() => {
+            getHotJob()
+            //Need to move element
+        }, 10000)
 
         if (fields.length === 0) getFields()
         if (cities.length === 0) getCities()
+        if (hotJob.length === 0) getHotJob()
         let reqParams = ''
         if (params && params.keyword) reqParams += `keyword=${params.keyword}&`
         if (params && params.page) reqParams += `page=${params.page}&`
@@ -86,8 +98,8 @@ const DashBoard = () => {
 
         console.log(reqParams)
         getPosts(reqParams === '' ? 'page=1&limit=12' : reqParams)
+        return () => clearInterval(intervalId)
     }, [url])
-
     function setGetParam(params) {
         var newUrl = window.location.origin + window.location.pathname + '?' + params
         window.history.pushState({ path: newUrl }, '', newUrl)
@@ -101,38 +113,59 @@ const DashBoard = () => {
                 <Spiner animation="border" variant="info" />
             </div>
         )
+    }
+    if (posts === null || posts.length === 0) {
+        body = <NoPostFound />
     } else {
         body = (
             <>
-                <label forhtml="limitSelect" className="page-size-label">
-                    Change Limit Page Size:
-                </label>
-                <select
-                    className="page-size-select"
-                    id="limitSelect"
-                    onChange={(e) => {
-                        setChangeLimit(e.target.value)
-                        reloadPage(e.target.value)
-                    }}
-                >
-                    <option value={DEFAULT_PAGE_POSTS} defaultChecked>
-                        {DEFAULT_PAGE_POSTS}
-                    </option>
-                    <option value={DEFAULT_PAGE_POSTS * 2}>{DEFAULT_PAGE_POSTS * 2}</option>
-                    <option value={DEFAULT_PAGE_POSTS * 4}>{DEFAULT_PAGE_POSTS * 4}</option>
-                </select>
                 {posts.length === 0 ? (
                     <NoPostFound />
                 ) : (
                     <>
-                        <Row className="row-cols-1 row-cols-md-3 g-4 mx-auto mt-3 container main-row post-padding">
-                            {posts.map((post) => (
-                                <Col key={post.id} className="my-2 ">
-                                    <SinglePost post={post} />
-                                </Col>
-                            ))}
-                        </Row>
-                        <PostPaging handlePageChange={handlePageChange} currentPage={currentPage} totalPage={totalPage} />
+                        <div className="hot-post-container">
+                            <h3 className="hot-job-text">Hot job</h3>
+
+                            <Row className="row-cols-1 row-cols-md-3 g-4 mx-auto mt-3 main-row post-padding hot-job-container">
+                                {hotJob.map((post) => (
+                                    <Col key={post.id} style={{ padding: '10px', marginTop: '0px' }}>
+                                        <SingleHotJob post={post} />
+                                    </Col>
+                                ))}
+                            </Row>
+                        </div>
+
+                        <hr></hr>
+
+                        <div className="normal-post-container">
+                            <h3 className="hot-job-text">Available job</h3>
+
+                            <Row className="row-cols-1 row-cols-md-3 g-4 mx-auto mt-3 main-row post-padding">
+                                {posts.map((post) => (
+                                    <Col key={post.id} style={{ padding: '10px', marginTop: '0px' }}>
+                                        <SinglePost post={post} />
+                                    </Col>
+                                ))}
+                            </Row>
+                            <PostPaging handlePageChange={handlePageChange} currentPage={currentPage} totalPage={totalPage} />
+                            <label forhtml="limitSelect" className="page-size-label">
+                                Change Limit Page Size:
+                            </label>
+                            <select
+                                className="page-size-select"
+                                id="limitSelect"
+                                onChange={(e) => {
+                                    setChangeLimit(e.target.value)
+                                    reloadPage(e.target.value)
+                                }}
+                            >
+                                <option value={DEFAULT_PAGE_POSTS} defaultChecked>
+                                    {DEFAULT_PAGE_POSTS}
+                                </option>
+                                <option value={DEFAULT_PAGE_POSTS * 2}>{DEFAULT_PAGE_POSTS * 2}</option>
+                                <option value={DEFAULT_PAGE_POSTS * 4}>{DEFAULT_PAGE_POSTS * 4}</option>
+                            </select>
+                        </div>
                     </>
                 )}
             </>

@@ -71,6 +71,8 @@ const EmployerRegisterForm = () => {
                     setAlert({ type: 'danger', message: empRegisterData.message })
                     setTimeout(() => setAlert(null), 10000)
                 }
+                window.location.replace('/user/login')
+
             } catch (error) {
                 console.log(error)
             }

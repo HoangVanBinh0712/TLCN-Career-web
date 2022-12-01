@@ -2,6 +2,7 @@ export const apiUrl = process.env.NODE_ENV !== 'production' ? 'http://localhost:
 export const LOCAL_STORAGE_TOKEN_NAME = 'user-token'
 export const POSTS_LOADED_SUCCESS = 'POSTS_LOADED_SUCCESS'
 export const REFRESH_TOKEN = 'REFRESH_TOKEN'
+export const POST_FIND_SUCCESS = 'POST_FIND_SUCCESS'
 export const POSTS_LOADED_FAIL = 'POSTS_LOADED_FAIL'
 export const POST_ADDED_SUCCESS = 'POST_ADDED_SUCCESS'
 export const USER_ROLE = 'USER_ROLE'
