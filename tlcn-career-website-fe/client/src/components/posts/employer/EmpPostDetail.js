@@ -138,6 +138,15 @@ const EmpPostDetail = () => {
                                                 <span className="content">{post.recruit} Peoples</span>
                                             </div>
                                         </div>
+                                        <div className="row summary-item">
+                                            <div className="col-xs-2 summary-icon">
+                                                <img src={locationIcon} alt="img" className="icon icon-date-posted" />
+                                            </div>
+                                            <div className="col-xs-10 summary-content">
+                                                <span className="content-label"> Location</span>
+                                                <span className="content"> {post.city}</span>
+                                            </div>
+                                        </div>
                                         <div className="cvSubmitted">
                                             <div className="row summary-item gradient-border " disabled={listCVLoading}>
                                                 <div className="col-xs-2 summary-icon">

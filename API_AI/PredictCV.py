@@ -148,7 +148,7 @@ train_label_sequences = np.array(train_label_sequences)
 test_label_sequences = np.array(test_label_sequences)
 
 # %%
-num_epochs = 30
+num_epochs = 50
 history = model.fit(train_feature_padded, train_label_sequences, epochs=num_epochs, validation_data=(test_feature_padded, test_label_sequences), verbose=2)
 score = model.evaluate(test_feature_padded, test_label_sequences, verbose=1)
 print("Test Accuracy:", score[1])

@@ -2,6 +2,7 @@ package com.be.dto.list;
 
 import java.util.Date;
 
+import com.be.dto.CityDTO;
 import com.be.utility.datatype.ESalary;
 import com.be.utility.datatype.EStatus;
 
@@ -38,5 +39,7 @@ public class PostsDTO {
 	private Date acceptedDate;
 
 	private EStatus status;
+
+	private CityDTO city;
 
 }

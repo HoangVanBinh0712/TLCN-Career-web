@@ -2,7 +2,10 @@ import Card from 'react-bootstrap/Card'
 import Row from 'react-bootstrap/Row'
 import Col from 'react-bootstrap/Col'
 import { Link } from 'react-router-dom'
-const SinglePost = ({ post: { id, title, description, salary, salaryType } }) => (
+import locationIcon from '../../assets/location.png'
+import moneyIcon from '../../assets/moneyIcon.png'
+
+const SinglePost = ({ post: { id, title, description, salary, salaryType, city } }) => (
     <Card className="white-space: nowrap" border={'success'}>
         <Card.Body>
             <Card.Title>
@@ -16,14 +19,17 @@ const SinglePost = ({ post: { id, title, description, salary, salaryType } }) =>
             </Card.Title>
             <Card.Text className="card-text user-post-description">{description}</Card.Text>
             <Card.Text className="card-text">
-                <img
-                    src="https://www.pngitem.com/pimgs/m/90-907567_transparent-cash-cow-png-money-icon-png-image.png"
-                    width="40px"
-                    height="30px"
-                    style={{ marginRight: '10px' }}
-                    alt="img.png"
-                />
-                {salary} {salaryType !== 'NONE' ? salaryType : ''}
+                <Row>
+                    <Col className="col-6">
+                        <img src={moneyIcon} width="40px" height="30px" style={{ marginRight: '10px' }} alt="img.png" />
+                        {salary} {salaryType !== 'NONE' ? salaryType : ''}
+                    </Col>
+
+                    <Col className="col-6">
+                        <img src={locationIcon} width="40px" height="30px" style={{ marginRight: '10px' }} alt="img.png" />
+                        {city.name}
+                    </Col>
+                </Row>
             </Card.Text>
         </Card.Body>
     </Card>

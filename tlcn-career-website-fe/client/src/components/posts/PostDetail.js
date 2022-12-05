@@ -16,7 +16,7 @@ import NoPostFound from '../NoPostFound'
 import Col from 'react-bootstrap/esm/Col'
 import Row from 'react-bootstrap/esm/Row'
 import swal from 'sweetalert'
-
+import locationIcon from '../../assets/location.png'
 import '../css/PostDetail.css'
 
 const PostDetail = () => {
@@ -190,6 +190,15 @@ const PostDetail = () => {
                                             <div className="col-xs-10 summary-content">
                                                 <span className="content-label"> Recruit</span>
                                                 <span className="content"> {post.recruit} Peoples</span>
+                                            </div>
+                                        </div>
+                                        <div className="row summary-item">
+                                            <div className="col-xs-2 summary-icon">
+                                                <img src={locationIcon} alt="img" className="icon icon-date-posted" />
+                                            </div>
+                                            <div className="col-xs-10 summary-content">
+                                                <span className="content-label"> Location</span>
+                                                <span className="content"> {post.city}</span>
                                             </div>
                                         </div>
                                     </div>

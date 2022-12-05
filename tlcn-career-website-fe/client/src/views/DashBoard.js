@@ -123,20 +123,6 @@ const DashBoard = () => {
                     <NoPostFound />
                 ) : (
                     <>
-                        <div className="hot-post-container">
-                            <h3 className="hot-job-text">Hot job</h3>
-
-                            <Row className="row-cols-1 row-cols-md-3 g-4 mx-auto mt-3 main-row post-padding hot-job-container">
-                                {hotJob.map((post) => (
-                                    <Col key={post.id} style={{ padding: '10px', marginTop: '0px' }}>
-                                        <SingleHotJob post={post} />
-                                    </Col>
-                                ))}
-                            </Row>
-                        </div>
-
-                        <hr></hr>
-
                         <div className="normal-post-container">
                             <h3 className="hot-job-text">Available job</h3>
 
@@ -165,6 +151,19 @@ const DashBoard = () => {
                                 <option value={DEFAULT_PAGE_POSTS * 2}>{DEFAULT_PAGE_POSTS * 2}</option>
                                 <option value={DEFAULT_PAGE_POSTS * 4}>{DEFAULT_PAGE_POSTS * 4}</option>
                             </select>
+                        </div>
+                        <hr></hr>
+
+                        <div className="hot-post-container">
+                            <h3 className="hot-job-text">Hot job</h3>
+
+                            <Row className="row-cols-1 row-cols-md-3 g-4 mx-auto mt-3 main-row post-padding hot-job-container">
+                                {hotJob.map((post) => (
+                                    <Col key={post.id} style={{ padding: '10px', marginTop: '0px' }}>
+                                        <SingleHotJob post={post} />
+                                    </Col>
+                                ))}
+                            </Row>
                         </div>
                     </>
                 )}
