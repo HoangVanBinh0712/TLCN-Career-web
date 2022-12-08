@@ -26,6 +26,10 @@ import PageNotFound from './components/notfound/PageNotFound'
 import EmpOrder from './components/posts/employer/EmpOrders'
 import Services from './components/services/Services'
 import UnloginRoute from './components/routing/UnloginRoute'
+import ConfirmEmail from './components/auth/ConfirmEmail'
+import ResetPassword from './components/auth/ResetPassword'
+import ForgetPassword from './components/auth/ForgetPassword'
+
 function App() {
     return (
         <AuthContextProvider>
@@ -40,6 +44,11 @@ function App() {
                             <Route exact path="/employer/register" render={(props) => <AuthEmployer {...props} authRoute="employer-register" />} />
                             <Route exact path="/admin/login" render={(props) => <AuthAdmin {...props} authRoute="admin-login" />} />
                             <Route exact path="/admin" component={AdminLanding} />
+                            <Route exact path="/verify" component={ConfirmEmail} />
+                            <Route exact path="/reset-password" component={ResetPassword} />
+
+                            <Route exact path="/send-verify" component={ForgetPassword} />
+
                             {/* Authenticate to use -19/11 public ROUTE */}
 
                             <UnloginRoute exact path="/dashboard" component={DashBoard} />

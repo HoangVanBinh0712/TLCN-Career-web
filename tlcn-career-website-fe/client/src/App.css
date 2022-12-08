@@ -779,3 +779,8 @@ h5 {
     border-radius: 5px;
     border: 1px solid #ced4da;
 }
+.restpassword{
+    width: 50%;
+    padding: 30px;
+    margin: auto;
+}

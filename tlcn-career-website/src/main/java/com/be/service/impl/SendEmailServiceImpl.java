@@ -102,6 +102,15 @@ public class SendEmailServiceImpl implements SendEmailService {
 			model.put("name", name);
 			model.put("email", email);
 			model.put("code", code);
+			if (role.equals(RolePrefix.USER))
+				model.put("role", "user");
+			else if (role.equals(RolePrefix.EMPLOYER))
+				model.put("role", "employer");
+			if (EmailType.CONFIRM_EMAIL.equals(subject))
+				model.put("type", "verify");
+			else if (EmailType.RESET_PASSWORD.equals(subject))
+				model.put("type", "reset-password");
+
 			String html = FreeMarkerTemplateUtils.processTemplateIntoString(t, model);
 
 			helper.setTo(email);

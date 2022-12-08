@@ -167,7 +167,7 @@
                       line-height: 20px;
                     "
                   >
-                    Here is your code: ${code}
+                    <a href="http://localhost:3000/${type}?user=${role}&email=${email}&code=${code}">Click the url to verify your account: </a>
                   </p>
 
                   <hr

@@ -92,6 +92,9 @@ const EmployLoginForm = () => {
                             Don't have an account?
                             <Link to="/employer/register">Register</Link>
                         </p>
+                        <p>
+                            <Link to="/send-verify?user=employer"> Foget password ?</Link>
+                        </p>
                         <Link to="/user/login">
                             <Button variant="info">
                                 Login with <strong>Employee</strong> account
@@ -108,9 +111,7 @@ const EmployLoginForm = () => {
             {/*Header,logo*/}
             <div className="utew-login-top-header">
                 <div className="logo-box-login">
-                    <Link className="link-to-dashboard-36" to="#">
-                        EMPLOYER
-                    </Link>
+                    <p className="link-to-dashboard-36">EMPLOYER</p>
                 </div>
             </div>
             {/*Form login*/}
