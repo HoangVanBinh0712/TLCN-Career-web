@@ -15,7 +15,6 @@ const AdminPost = () => {
     const lstStatus = ['ACTIVE', 'WAIT_FOR_PAYMENT', 'WAIT_FOR_ACCEPT', 'DISABLE', 'DELETED', 'DELETED_BY_ADMIN']
     const [postStatus, setPostStatus] = useState('ACTIVE')
     const [keyword, setKeyword] = useState('')
-
     const {
         postState: { posts, postLoading, currentPage, totalPage },
         getAdminPosts,
@@ -138,6 +137,7 @@ const AdminPost = () => {
                         <PostPaging handlePageChange={handlePageChange} currentPage={currentPage} totalPage={totalPage} />
                     </>
                 )}
+    
                 <Toast
                     show={show}
                     style={{ position: 'fixed', top: '20%', right: '10px' }}

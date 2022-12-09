@@ -3,13 +3,18 @@ import moneyIcon from '../../assets/moneyIcon.png'
 import recruitIcon from '../../assets/recruitIcon.png'
 import Col from 'react-bootstrap/esm/Col'
 import Row from 'react-bootstrap/esm/Row'
+import Button from 'react-bootstrap/esm/Button'
+import swal from 'sweetalert'
 
-const SingleService = ({ service }) => {
+const SingleService = ({ service, isAdmin, setUpdatingService, setShowUpdateServiceModal }) => {
     const type = service?.name.split('-')[0]
     const lib = {
         BASIC: 'success',
         ADVANCE: 'warning',
         PREMIUM: 'danger',
+    }
+    const deleteService = () => {
+        swal('Info', 'The website dose not provide this function yet !', 'warning')
     }
     let body
     if (type === 'PREMIUM') {
@@ -39,6 +44,32 @@ const SingleService = ({ service }) => {
                             </Col>
                         </Row>
                     </Card.Text>
+                    {isAdmin && (
+                        <Card.Text>
+                            <div className="group-service-buttons">
+                                <Button
+                                    className="btn admin-service-btn"
+                                    variant="outline-warning"
+                                    onClick={() => {
+                                        setUpdatingService(service)
+                                        setShowUpdateServiceModal(true)
+                                    }}
+                                >
+                                    Update
+                                </Button>
+
+                                <Button
+                                    className="btn admin-service-btn"
+                                    variant="outline-danger"
+                                    onClick={async () => {
+                                        deleteService()
+                                    }}
+                                >
+                                    Delete
+                                </Button>
+                            </div>
+                        </Card.Text>
+                    )}
                 </Card.Body>
             </Card>
         )
@@ -69,6 +100,32 @@ const SingleService = ({ service }) => {
                             </Col>
                         </Row>
                     </Card.Text>
+                    {isAdmin && (
+                        <Card.Text>
+                            <div className="group-service-buttons">
+                                <Button
+                                    className="btn admin-service-btn"
+                                    variant="outline-warning"
+                                    onClick={() => {
+                                        setUpdatingService(service)
+                                        setShowUpdateServiceModal(true)
+                                    }}
+                                >
+                                    Update
+                                </Button>
+
+                                <Button
+                                    className="btn admin-service-btn"
+                                    variant="outline-danger"
+                                    onClick={async () => {
+                                        deleteService()
+                                    }}
+                                >
+                                    Delete
+                                </Button>
+                            </div>
+                        </Card.Text>
+                    )}
                 </Card.Body>
             </Card>
         )
@@ -99,6 +156,32 @@ const SingleService = ({ service }) => {
                             </Col>
                         </Row>
                     </Card.Text>
+                    {isAdmin && (
+                        <Card.Text>
+                            <div className="group-service-buttons">
+                                <Button
+                                    className="btn admin-service-btn"
+                                    variant="outline-warning"
+                                    onClick={() => {
+                                        setUpdatingService(service)
+                                        setShowUpdateServiceModal(true)
+                                    }}
+                                >
+                                    Update
+                                </Button>
+
+                                <Button
+                                    className="btn admin-service-btn"
+                                    variant="outline-danger"
+                                    onClick={async () => {
+                                        deleteService()
+                                    }}
+                                >
+                                    Delete
+                                </Button>
+                            </div>
+                        </Card.Text>
+                    )}
                 </Card.Body>
             </Card>
         )

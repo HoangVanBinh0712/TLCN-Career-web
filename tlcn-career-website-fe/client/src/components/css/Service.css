@@ -52,3 +52,14 @@
 .advance-service-border ::before {
     background: linear-gradient(to right, #9ccefc, #b9c8ff);
 }
+
+
+.admin-service-btn{
+margin-left: 2px;
+}
+
+.group-service-buttons{
+    display: flex;
+    box-sizing: border-box;
+    justify-content: space-around;
+}
