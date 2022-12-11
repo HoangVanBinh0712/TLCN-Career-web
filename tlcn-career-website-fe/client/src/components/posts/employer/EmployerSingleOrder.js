@@ -9,7 +9,10 @@ import fieldIcon from '../../../assets/fieldIcon.png'
 import { Link } from 'react-router-dom'
 import Col from 'react-bootstrap/esm/Col'
 import Row from 'react-bootstrap/esm/Row'
-
+import Button from 'react-bootstrap/esm/Button'
+import axios from 'axios'
+import { apiUrl } from '../../../contexts/constants'
+import swal from 'sweetalert'
 const EmployerSingleOrder = ({ order }) => {
     return (
         <Card className="white-space: nowrap card-emp-post" border={order.status === 'PAID' ? 'success' : 'warning'}>
@@ -19,9 +22,22 @@ const EmployerSingleOrder = ({ order }) => {
                         <Col className="col-9">Order for: {order.post.title}</Col>
                         <Col className="con-3" style={{ textAlign: 'right' }}>
                             {order.status !== 'PAID' ? (
-                                <Link to={`/payment/${order.id}`} target="_blank">
-                                    Paid now !
-                                </Link>
+                                <Button
+                                    className="btn"
+                                    onClick={async (event) => {
+                                        event.preventDefault()
+                                        try {
+                                            const response = await axios.post(`${apiUrl}/pay?orderId=${order.id}`)
+                                            if (response.data.success) {
+                                                window.open(response.data.message)
+                                            } else swal('Error', 'Something went wrong !', 'error')
+                                        } catch (error) {
+                                            swal('Error', 'Order not found !', 'error')
+                                        }
+                                    }}
+                                >
+                                    Pay
+                                </Button>
                             ) : (
                                 ''
                             )}

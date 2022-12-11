@@ -114,7 +114,9 @@ const UserLoginForm = () => {
             {/*Header,logo*/}
             <div className="utew-login-top-header">
                 <div className="logo-box-login">
-                    <p className="link-to-dashboard-36">EMPLOYEE</p>
+                    <Link className="link-to-dashboard-36" to="/dashboard">
+                        EMPLOYEE
+                    </Link>
                 </div>
             </div>
             {/*Form login*/}

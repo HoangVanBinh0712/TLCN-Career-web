@@ -69,6 +69,9 @@ const NavbarMenu = () => {
                     <Nav.Link className="font-weigth-border link-to-dashboard-20" to="/employer/posts" as={Link}>
                         Your Posts
                     </Nav.Link>
+                    <Nav.Link className="font-weigth-border link-to-dashboard-20" to="/employer/orders" as={Link}>
+                        Your orders
+                    </Nav.Link>
                 </Nav>
                 <Nav className="sc-geuGuN cpxZcn rightNavigation-homepage">
                     <Nav.Link className="font-weigth-border link-to-dashboard-20" to="/user/login" as={Link}>

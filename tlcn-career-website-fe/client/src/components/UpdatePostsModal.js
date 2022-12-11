@@ -10,7 +10,7 @@ import { apiUrl } from '../contexts/constants'
 
 const UpdatePostModal = () => {
     // Contexts
-
+    const lstStatus = ['ACTIVE', 'DISABLE']
     const { updatePost, updatingPost, setUpdatingPost, setShowToast, showUpdatePost, setShowUpdatePost, fieldAndCity, services } = useContext(EmployerPostContext)
     const [updateLoading, setUpdateLoading] = useState(false)
     const [post, setPost] = useState(null)
@@ -35,6 +35,7 @@ const UpdatePostModal = () => {
         fieldCode: '',
         cityCode: '',
         service: post?.service.id,
+        status: post?.status,
     })
 
     useEffect(() => {
@@ -59,6 +60,7 @@ const UpdatePostModal = () => {
                         fieldCode: fieldAndCity[0].filter((pfield) => pfield.name === response.data.data.field)[0].code,
                         cityCode: fieldAndCity[1].filter((pcity) => pcity.name === response.data.data.city)[0].code,
                         service: services.filter((sv) => sv.id === response.data.data.service.id)[0].id,
+                        status: response.data.data ? response.data.data.status : '',
                     })
                     return
                 }
@@ -71,7 +73,7 @@ const UpdatePostModal = () => {
         getEmployerPostDetail(updatingPost.id)
     }, [updatingPost])
 
-    const { title, description, salary, salaryType, location, recruit, startDate, duration, avatar, fieldCode, cityCode, service } = newPost
+    const { title, description, salary, salaryType, location, recruit, startDate, duration, avatar, fieldCode, cityCode, service, status } = newPost
 
     const onChangeNewPostForm = (event) => setNewPost({ ...newPost, [event.target.name]: event.target.value })
 
@@ -221,6 +223,21 @@ const UpdatePostModal = () => {
                                 min={1}
                                 onChange={onChangeNewPostForm}
                             />
+                        </Form.Group>
+                        <Form.Group className="mb-3">
+                            <Form.Text id="title-help" muted>
+                                Status
+                            </Form.Text>
+                            <Form.Select name="status" value={status} onChange={onChangeNewPostForm}>
+                                <option key={0} value="">
+                                    Select status
+                                </option>
+                                {lstStatus.map((s) => (
+                                    <option key={s} value={s}>
+                                        {s}
+                                    </option>
+                                ))}
+                            </Form.Select>{' '}
                         </Form.Group>
                         <Form.Group>
                             <Form.Label> Field</Form.Label>

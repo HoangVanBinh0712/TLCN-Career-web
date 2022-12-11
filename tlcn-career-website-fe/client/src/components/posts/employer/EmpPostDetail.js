@@ -15,6 +15,8 @@ import { apiUrl } from '../../../contexts/constants'
 import axios from 'axios'
 import CVSubmitModal from '../../CVSubmitModal'
 import '../../css/PostDetail.css'
+import Row from 'react-bootstrap/esm/Row'
+import Col from 'react-bootstrap/esm/Col'
 
 const EmpPostDetail = () => {
     let { id } = useParams()
@@ -174,7 +176,7 @@ const EmpPostDetail = () => {
                                     </div>
                                 </div>
                             </div>
-                            <div className="col-md-9  col-sm-12 tab-main-content">
+                            {/* <div className="col-md-9  col-sm-12 tab-main-content">
                                 <div className="job-description mobile-box">
                                     <h2 style={{ width: '50%' }}>Job Description</h2>
                                     <ul className="description">
@@ -191,6 +193,25 @@ const EmpPostDetail = () => {
                                 ) : (
                                     ''
                                 )}
+                            </div> */}
+                            <div className="col-md-9  col-sm-12 tab-main-content">
+                                <Row>
+                                    <Col className="col-7">
+                                        <div className="job-description mobile-box">
+                                            <h2 style={{ width: '50%' }}>Job Description</h2>
+                                            <div className="description" style={{ width: '100%' }}>
+                                                {/* <p>{posts.description}</p> */}
+                                                {post.description.split('\n').map((line) => (
+                                                    <p>{line}</p>
+                                                ))}
+                                            </div>
+                                        </div>
+                                    </Col>
+                                    <Col className="col-1"></Col>
+                                    <Col className="col-4">
+                                        <img src={post.avatar} alt="" className="img-center mt-5" />
+                                    </Col>
+                                </Row>
                             </div>
                         </div>
                     </div>

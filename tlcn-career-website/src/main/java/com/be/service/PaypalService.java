@@ -62,16 +62,25 @@ public class PaypalService {
 
         Item item = new Item();
         item.setName(String.format("Rent service %s in %d months.", service.getName(), order.getDuration()));
-        item.setCurrency(currency);
-        item.setPrice(service.getPrice().toString());
+        if (currency.equals("USD")) {
+            item.setCurrency(currency);
+            item.setPrice(service.getPrice().toString());
+        } else {
+            // VND
+            total = total / 25000;
+            item.setCurrency("USD");
+            Double x = service.getPrice() / 25000;
+            item.setPrice(x.toString());
+        }
+
         item.setSku("001");
         item.setQuantity(order.getDuration().toString());
-        
+
         items.add(item);
         itemList.setItems(items);
 
         Amount amount = new Amount();
-        amount.setCurrency(currency);
+        amount.setCurrency("USD");
         total = new BigDecimal(total).setScale(2, RoundingMode.HALF_UP).doubleValue();
         amount.setTotal(String.format("%.2f", total));
 
@@ -94,7 +103,7 @@ public class PaypalService {
         redirectUrls.setCancelUrl(cancelUrl);
         redirectUrls.setReturnUrl(successUrl);
         payment.setRedirectUrls(redirectUrls);
-    
+
         return payment.create(apiContext);
     }
 

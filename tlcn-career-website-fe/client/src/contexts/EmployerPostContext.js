@@ -140,6 +140,7 @@ const EmployerPostContextProvider = ({ children }) => {
                 dispatch({ type: POST_UPDATED_SUCCESS, payload: response.data.data })
                 return response.data
             }
+            return response.data
         } catch (error) {
             return error.response.data ? error.response.data : { success: false, message: 'Server error' }
         }

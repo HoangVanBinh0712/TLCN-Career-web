@@ -82,7 +82,7 @@ const AdminLoginForm = () => {
             {/*Header,logo*/}
             <div className="utew-login-top-header">
                 <div className="logo-box-login">
-                    <p className="link-to-dashboard-36">ADMIN</p>
+                    <Link className="link-to-dashboard-36" to="/dashboard">ADMIN</Link>
                 </div>
             </div>
             {/*Form login*/}

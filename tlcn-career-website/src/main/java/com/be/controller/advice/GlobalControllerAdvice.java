@@ -7,6 +7,7 @@ import java.text.ParseException;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.NoSuchElementException;
 
 import javax.persistence.EntityNotFoundException;
 import javax.persistence.OptimisticLockException;
@@ -32,6 +33,12 @@ public class GlobalControllerAdvice {
 	@ResponseStatus(HttpStatus.BAD_REQUEST)
 	public BaseResponse ssuserInfoExceptionHandler(CommonRuntimeException ex) {
 		return new BaseResponse(false, ex.getMessage());
+	}
+
+	@ExceptionHandler(NoSuchElementException.class)
+	@ResponseStatus(HttpStatus.BAD_REQUEST)
+	public BaseResponse noValuePresent(NoSuchElementException ex) {
+		return new BaseResponse(false, "No value present !");
 	}
 
 	@ExceptionHandler(BadCredentialsException.class)
@@ -105,7 +112,7 @@ public class GlobalControllerAdvice {
 	public BaseResponse StaleStateExceptionHandler(StaleStateException ex) {
 		return new BaseResponse(false, "Something went wrong. Please try again !");
 	}
-	
+
 	@ExceptionHandler(TransactionException.class)
 	@ResponseStatus(HttpStatus.BAD_REQUEST)
 	public BaseResponse TransactionExceptionHandler(TransactionException ex) {

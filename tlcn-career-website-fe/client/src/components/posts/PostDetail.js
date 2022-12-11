@@ -115,7 +115,7 @@ const PostDetail = () => {
                                     </div>
                                 </div>
                             </div>
-                            {isUser ? (
+                            {isUser && post.active ? (
                                 <div className="col-lg-3 col-md-3 col-btn col-btn-save-section ">
                                     <div className="row">
                                         <div className="col-xs-6 col-xs-push-6 col-md-12 col-md-push-0">
@@ -128,7 +128,15 @@ const PostDetail = () => {
                                     </div>
                                 </div>
                             ) : (
-                                ''
+                                <div className="col-lg-3 col-md-3 col-btn col-btn-save-section ">
+                                    <div className="row">
+                                        <div className="col-xs-6 col-xs-push-6 col-md-12 col-md-push-0">
+                                            <Button className="btn btn-primary btn-block btn-apply track-event" variant="warning">
+                                                Job is disabled !
+                                            </Button>
+                                        </div>
+                                    </div>
+                                </div>
                             )}
                         </div>
                     </div>

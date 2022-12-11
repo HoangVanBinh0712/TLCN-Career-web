@@ -111,7 +111,7 @@ const EmployLoginForm = () => {
             {/*Header,logo*/}
             <div className="utew-login-top-header">
                 <div className="logo-box-login">
-                    <p className="link-to-dashboard-36">EMPLOYER</p>
+                <Link className="link-to-dashboard-36" to="/dashboard">EMPLOYER</Link>
                 </div>
             </div>
             {/*Form login*/}

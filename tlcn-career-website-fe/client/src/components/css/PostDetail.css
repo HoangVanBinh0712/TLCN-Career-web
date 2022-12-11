@@ -204,4 +204,5 @@
 li {
     text-align: justify;
     margin-top: 8px;
+    list-style-type: none;
 }
