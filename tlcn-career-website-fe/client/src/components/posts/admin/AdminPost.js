@@ -66,6 +66,7 @@ const AdminPost = () => {
             params.set('limit', 9)
         }
         if (status) params.set('status', status)
+        if (status === 'NONE') params.delete('status')
         if (keyword && keyword !== '') params.set('keyword', keyword)
         else params.delete('keyword')
         setGetParam(params.toString())
@@ -96,6 +97,15 @@ const AdminPost = () => {
                         </Dropdown.Toggle>
 
                         <Dropdown.Menu>
+                            <Dropdown.Item
+                                key="NONE"
+                                onClick={() => {
+                                    setPostStatus('NONE')
+                                    handlePageChange(1, 'NONE', keyword)
+                                }}
+                            >
+                                NONE
+                            </Dropdown.Item>
                             {lstStatus.map((st) => (
                                 <Dropdown.Item
                                     key={st}
@@ -109,10 +119,10 @@ const AdminPost = () => {
                             ))}
                         </Dropdown.Menu>
                     </Dropdown>
-                    <div>
+                    <div className="admin-post-search-holder">
                         <input
                             id="admin-post-search"
-                            className='admin-post-search-input'
+                            className="admin-post-search-input"
                             type="text"
                             placeholder="Search"
                             value={keyword}
@@ -146,44 +156,44 @@ const AdminPost = () => {
                         <PostPaging handlePageChange={handlePageChange} currentPage={currentPage} totalPage={totalPage} />
                     </>
                 )}
-                <AddIndustryModal showIndustryModal={showIndustryModal} setShowIndustryModal={setShowIndustryModal} />
-                <AddLocationModal showLocationModal={showLocationModal} setShowLocationModal={setShowLocationModal} />
-
-                <OverlayTrigger placement="left" overlay={<Tooltip>Add New Industry</Tooltip>}>
-                    <Button className="btn-floating btn" style={{ background: 'transparent', borderColor: 'none' }} onClick={setShowIndustryModal.bind(this, true)}>
-                        <img src={addIcon} alt="add post" width="60" height="60" />
-                    </Button>
-                </OverlayTrigger>
-                <OverlayTrigger placement="left" overlay={<Tooltip>Add New Location</Tooltip>}>
-                    <Button
-                        className="btn-floating btn"
-                        style={{ background: 'transparent', borderColor: 'none', marginTop: '100px' }}
-                        onClick={setShowLocationModal.bind(this, true)}
-                    >
-                        <img src={addIcon} alt="add post" width="60" height="60" />
-                    </Button>
-                </OverlayTrigger>
-                <Toast
-                    show={show}
-                    style={{ position: 'fixed', top: '20%', right: '10px' }}
-                    className={`bg-${type} text-white`}
-                    onClose={setShowToast.bind(this, {
-                        show: false,
-                        message: '',
-                        type: null,
-                    })}
-                    delay={3000}
-                    autohide
-                >
-                    <Toast.Body>
-                        <strong>{message}</strong>
-                    </Toast.Body>
-                </Toast>
             </>
         )
     }
 
-    return <div className="mt-2 container admin-posts-container">{body}</div>
+    return (
+        <div className="mt-2 container admin-posts-container">
+            {body}
+            <AddIndustryModal showIndustryModal={showIndustryModal} setShowIndustryModal={setShowIndustryModal} />
+            <AddLocationModal showLocationModal={showLocationModal} setShowLocationModal={setShowLocationModal} />
+
+            <OverlayTrigger placement="left" overlay={<Tooltip>Add New Industry</Tooltip>}>
+                <Button className="btn-floating btn" style={{ background: 'transparent', borderColor: 'none' }} onClick={setShowIndustryModal.bind(this, true)}>
+                    <img src={addIcon} alt="add post" width="60" height="60" />
+                </Button>
+            </OverlayTrigger>
+            <OverlayTrigger placement="left" overlay={<Tooltip>Add New Location</Tooltip>}>
+                <Button className="btn-floating btn" style={{ background: 'transparent', borderColor: 'none', marginTop: '100px' }} onClick={setShowLocationModal.bind(this, true)}>
+                    <img src={addIcon} alt="add post" width="60" height="60" />
+                </Button>
+            </OverlayTrigger>
+            <Toast
+                show={show}
+                style={{ position: 'fixed', top: '20%', right: '10px' }}
+                className={`bg-${type} text-white`}
+                onClose={setShowToast.bind(this, {
+                    show: false,
+                    message: '',
+                    type: null,
+                })}
+                delay={3000}
+                autohide
+            >
+                <Toast.Body>
+                    <strong>{message}</strong>
+                </Toast.Body>
+            </Toast>
+        </div>
+    )
 }
 
 export default AdminPost

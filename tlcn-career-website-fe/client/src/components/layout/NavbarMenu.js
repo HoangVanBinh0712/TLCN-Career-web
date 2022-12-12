@@ -103,6 +103,8 @@ const NavbarMenu = () => {
                     <Nav.Link className="font-weigth-border link-to-dashboard-20" to="/admin/posts?page=1&limit=9&status=ACTIVE" as={Link}>
                         Job Manage
                     </Nav.Link>
+                </Nav>
+                <Nav className="sc-geuGuN cpxZcn rightNavigation-homepage">
                     <Button
                         variant="secondary"
                         className="font-weigth-border text-white"
