@@ -2,6 +2,8 @@ import Card from 'react-bootstrap/Card'
 import Row from 'react-bootstrap/Row'
 import Col from 'react-bootstrap/Col'
 import { Link } from 'react-router-dom'
+import {lib} from '../../contexts/constants'
+
 const SingleHotJob = ({ post: { id, title, description, salary, salaryType } }) => {
     return (
         <Card
@@ -30,7 +32,8 @@ const SingleHotJob = ({ post: { id, title, description, salary, salaryType } }) 
                         style={{ marginRight: '10px' }}
                         alt="img.png"
                     />
-                    {salary} {salaryType !== 'NONE' ? salaryType : ''}
+                    {salary}
+                    {salaryType !== 'NONE' ? lib[salaryType] : ''}
                 </Card.Text>
             </Card.Body>
         </Card>

@@ -17,6 +17,7 @@ import CVSubmitModal from '../../CVSubmitModal'
 import '../../css/PostDetail.css'
 import Row from 'react-bootstrap/esm/Row'
 import Col from 'react-bootstrap/esm/Col'
+import {lib} from '../../../contexts/constants'
 
 const EmpPostDetail = () => {
     let { id } = useParams()
@@ -127,7 +128,7 @@ const EmpPostDetail = () => {
                                             <div className="col-xs-10 summary-content">
                                                 <span className="content-label">What we can offer</span>
                                                 <span className="content">
-                                                    {post.salary} {post.salaryType}
+                                                    {post.salary}{lib[post.salaryType]}
                                                 </span>
                                             </div>
                                         </div>

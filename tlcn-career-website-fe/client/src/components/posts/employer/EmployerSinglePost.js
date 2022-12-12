@@ -5,6 +5,7 @@ import Button from 'react-bootstrap/Button'
 import { Link } from 'react-router-dom'
 import { useContext, useState } from 'react'
 import { EmployerPostContext } from '../../../contexts/EmployerPostContext'
+import {lib} from '../../../contexts/constants'
 
 const EmployerSinglePost = ({ post, deletePost, cvSubmit, setShowCVSubmitModal }) => {
     const { setUpdatingPost, setShowUpdatePost } = useContext(EmployerPostContext)
@@ -35,7 +36,7 @@ const EmployerSinglePost = ({ post, deletePost, cvSubmit, setShowCVSubmitModal }
                                 style={{ marginRight: '10px' }}
                                 alt="img.png"
                             />
-                            {post.salary} {post.salaryType !== 'NONE' ? post.salaryType : ''}
+                            {post.salary}{post.salaryType !== 'NONE' ? lib[post.salaryType] : ''}
                         </Card.Text>
                     </Col>
                     <Col className="col-1"></Col>

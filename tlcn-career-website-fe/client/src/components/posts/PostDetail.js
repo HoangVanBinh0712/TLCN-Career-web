@@ -18,6 +18,7 @@ import Row from 'react-bootstrap/esm/Row'
 import swal from 'sweetalert'
 import locationIcon from '../../assets/location.png'
 import '../css/PostDetail.css'
+import { lib } from '../../contexts/constants'
 
 const PostDetail = () => {
     let { id } = useParams()
@@ -186,8 +187,7 @@ const PostDetail = () => {
                                             <div className="col-xs-10 summary-content">
                                                 <span className="content-label"> What we can offer</span>
                                                 <span className="content">
-                                                    {' '}
-                                                    {post.salary} {post.salaryType}
+                                                    {post.salary}{lib[post.salaryType]}
                                                 </span>
                                             </div>
                                         </div>

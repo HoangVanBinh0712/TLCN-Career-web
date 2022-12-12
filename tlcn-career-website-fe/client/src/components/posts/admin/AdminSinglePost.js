@@ -5,6 +5,7 @@ import Button from 'react-bootstrap/Button'
 import { Link } from 'react-router-dom'
 import { useState } from 'react'
 import '../../css/AdminSinglePost.css'
+import {lib} from '../../../contexts/constants'
 
 const SinglePost = ({ post: { id, title, description, salary, salaryType, adminAceptedEmail, status }, adminDeletePost, acceptPost, borderColor }) => {
     const [functionLoading, setFunctionLoading] = useState(false)
@@ -30,7 +31,8 @@ const SinglePost = ({ post: { id, title, description, salary, salaryType, adminA
                         style={{ marginRight: '10px' }}
                         alt=""
                     />
-                    {salary} {salaryType !== 'NONE' ? salaryType : ''}
+                    {salary}
+                    {salaryType !== 'NONE' ? lib[salaryType] : ''}
                 </Card.Text>
                 <Row className="admin-single-post-button">
                     {status === 'WAIT_FOR_ACCEPT' || status === 'DELETED_BY_ADMIN' ? (

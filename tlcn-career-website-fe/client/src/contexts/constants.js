@@ -14,6 +14,7 @@ export const POST_UPDATED_SUCCESS = 'POST_UPDATED_SUCCESS'
 export const POSTS_PREDICT_SUCCESS = 'POSTS_PREDICT_SUCCESS'
 export const POSTS_PREDICT_FAIL = 'POSTS_PREDICT_FAIL'
 export const DEFAULT_PAGE_POSTS = 12
+export const lib = { THOUSAND: '000 VNĐ', MILLION: '.000.000 VNĐ', USD: 'USD', WAGE_AGREEMENT: 'WAGE_AGREEMENT' }
 
 export const JOBFIELD = [
     { label: 'Business Development', value: 4 },

@@ -13,6 +13,8 @@ import { AuthContext } from '../../../contexts/AuthContext'
 import { apiUrl } from '../../../contexts/constants'
 import axios from 'axios'
 import locationIcon from '../../../assets/location.png'
+import {lib} from '../../../contexts/constants'
+
 const AdminPostDetail = () => {
     let { id } = useParams()
 
@@ -124,7 +126,7 @@ const AdminPostDetail = () => {
                                             <div className="col-xs-10 summary-content">
                                                 <span className="content-label">What we can offer</span>
                                                 <span className="content">
-                                                    {post.salary} {post.salaryType}
+                                                    {post.salary}{lib[post.salaryType]}
                                                 </span>
                                             </div>
                                         </div>
