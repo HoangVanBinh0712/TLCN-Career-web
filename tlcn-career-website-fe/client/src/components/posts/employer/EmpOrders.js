@@ -7,6 +7,8 @@ import { MDBRadio, MDBBtnGroup } from 'mdb-react-ui-kit'
 import NoPostFound from '../../NoPostFound'
 import '../../css/EmpPost.css'
 import EmployerSingleOrder from './EmployerSingleOrder'
+import PostPaging from '../../PostPaging'
+import Dropdown from 'react-bootstrap/Dropdown'
 
 const EmpOrder = () => {
     const orderStatus = ['WAIT_FOR_PAYMENT', 'PAID']
@@ -15,28 +17,52 @@ const EmpOrder = () => {
         showToast: { show, message, type },
         setShowToast,
     } = useContext(EmployerPostContext)
-    const [orders, setOrders] = useState([])
+    const [orders, setOrders] = useState({ data: [], currentPage: 0, totalPage: 0 })
     const [orderLoading, setOrderLoading] = useState(true)
-    const [oStatus, setOStatus] = useState('WAIT_FOR_PAYMENT')
+    const [oStatus, setOStatus] = useState('PAID')
+    const [url, setUrl] = useState(window.location)
 
     useEffect(() => {
-        async function getListOrder(status) {
+        async function getListOrder(params) {
             setOrderLoading(true)
-            setOStatus(status)
-            const lstOrder = await getOrders(`status=${status}&page=1&limit=10`)
-            setOrders(lstOrder)
+            const lstOrder = await getOrders(`${params}`)
+
+            setOrders({ data: lstOrder.data, currentPage: lstOrder.currentPage, totalPage: lstOrder.totalPage })
             setOrderLoading(false)
         }
         const queryParameters = new URLSearchParams(window.location.search)
-        const status = queryParameters.get('status')
-        if (status) getListOrder(status)
-        else getListOrder('WAIT_FOR_PAYMENT')
-    }, [window.location.search])
+        const status = queryParameters.get('status') ? queryParameters.get('status') : 'PAID'
+        const page = queryParameters.get('page') ? queryParameters.get('page') : 1
+        const limit = queryParameters.get('limit') ? queryParameters.get('limit') : 9
 
-    const handleStatusChange = async (status) => {
-        var newUrl = window.location.origin + window.location.pathname + '?status=' + status
+        let params = ''
+        if (status) params += `status=${status}&`
+        params += `page=${page}&`
+        params += `limit=${limit}&`
+        getListOrder(params)
+        setOStatus(status)
+    }, [url])
+
+    function setGetParam(params) {
+        var newUrl = window.location.origin + window.location.pathname + '?' + params
         window.history.pushState({ path: newUrl }, '', newUrl)
+        setUrl(newUrl)
     }
+
+    const handlePageChange = (pageNumber, status, keyword) => {
+        const params = new URLSearchParams(window.location.search)
+
+        if (pageNumber) {
+            params.set('page', pageNumber)
+            params.set('limit', 9)
+        } else {
+            params.set('page', 1)
+            params.set('limit', 9)
+        }
+        if (status) params.set('status', status)
+        setGetParam(params.toString())
+    }
+
     let body = null
 
     if (orderLoading) {
@@ -50,35 +76,35 @@ const EmpOrder = () => {
             <>
                 <div className="container emp-post-page">
                     <div className="mt-2 banner">
-                        <MDBBtnGroup className="banner-buttons">
-                            {orderStatus.map((status) => {
-                                return (
-                                    <MDBRadio
-                                        key={status}
-                                        className="banner-button"
-                                        id="btn-radio"
-                                        name="options"
-                                        wrapperTag="span"
-                                        label={status}
-                                        checked={oStatus === status}
-                                        onChange={() => {
-                                            setOStatus(status)
-                                            handleStatusChange(status)
+                        <Dropdown>
+                            <Dropdown.Toggle variant="success" id="dropdown-basic">
+                                {oStatus}
+                            </Dropdown.Toggle>
+                            <Dropdown.Menu>
+                                {orderStatus.map((st) => (
+                                    <Dropdown.Item
+                                        key={st}
+                                        onClick={() => {
+                                            setOStatus(st)
+                                            handlePageChange(null, st, null)
                                         }}
-                                    />
-                                )
-                            })}
-                        </MDBBtnGroup>
+                                    >
+                                        {st}
+                                    </Dropdown.Item>
+                                ))}
+                            </Dropdown.Menu>
+                        </Dropdown>
                     </div>
-                    {orders.length === 0 ? (
+                    {orders.data.length === 0 ? (
                         <NoPostFound />
                     ) : (
                         <>
-                            {orders.map((order) => (
+                            {orders.data.map((order) => (
                                 <Row key={order.id} className="list-posts row-cols-1 row-cols-md-3 g-4 mx-auto main-row">
                                     <EmployerSingleOrder order={order} />
                                 </Row>
                             ))}
+                            <PostPaging handlePageChange={handlePageChange} currentPage={orders.currentPage} totalPage={orders.totalPage} />
                         </>
                     )}
                     <Toast

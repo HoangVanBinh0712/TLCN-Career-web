@@ -124,7 +124,6 @@ const AdminPost = () => {
                             id="admin-post-search"
                             className="admin-post-search-input"
                             type="text"
-                            placeholder="Search"
                             value={keyword}
                             onChange={(event) => {
                                 setKeyword(event.target.value)

@@ -178,7 +178,7 @@ const EmployerPostContextProvider = ({ children }) => {
     const getOrders = async (params) => {
         try {
             const response = await axios.get(`${apiUrl}/employer/order?${params}`)
-            return response.data.data
+            return response.data
         } catch (error) {
             return error.response.data ? error.response.data : { success: false, message: 'Server error' }
         }
