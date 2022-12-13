@@ -21,11 +21,11 @@ Website tuyển dụng giúp người dùng có thể tìm kiếm và ứng tuy�
 <hr>
 <h2>Cài đặt website </h2>
 1. Tải dự án về máy tính của bạn. <br>
-2. Mở Mysql workbench tạo một cơ sở dữ liệu mới có tên: tlcn_career_website, chạy file TLCN_DBScript.sql
+2. Mở Mysql workbench tạo một cơ sở dữ liệu mới có tên: tlcn_career_website, chạy file TLCN_DBScript.sql<br>
 3. Mở Vscode terminal và dẫn đến đường dẫn /tlcn-career-website-fe/client: cd tlcn-career-website-fe/client<br>
 4. Chạy phần front-end: npm install --> npm start <br>
-5. Mở tệp tlcn-career-website/src/main/resources/application.properties và thay thế mật khẩu cơ sở dữ liệu tại spring.datasource.password
+5. Mở tệp tlcn-career-website/src/main/resources/application.properties và thay thế mật khẩu cơ sở dữ liệu tại spring.datasource.password <br>
 6. Mở thư mục /tlcn-career-website/src/main/java/com/be/ và chạy file TLCNCareerWebsiteApplication.java: chuột phải và chọn Run Java Application<br>
-7. Mở thư mục /API_AI và cài đặt các thư viện: pip install -r requirements.txt
-8. Chạy phần AI: python -m uvicorn app:app --reload hoặc python3 -m uvicorn app:app --reload
+7. Mở thư mục /API_AI và cài đặt các thư viện: pip install -r requirements.txt<br>
+8. Chạy phần AI: python -m uvicorn app:app --reload hoặc python3 -m uvicorn app:app --reload<br>
 
