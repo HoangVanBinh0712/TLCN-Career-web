@@ -63,3 +63,8 @@ margin-left: 2px;
     box-sizing: border-box;
     justify-content: space-around;
 }
+.service-text{
+    -webkit-line-clamp: 10;
+    min-height: 160px;
+
+}

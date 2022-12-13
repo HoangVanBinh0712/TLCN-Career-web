@@ -24,6 +24,7 @@ const EmployerRegisterForm = () => {
         employee: 0,
         confirmpassword: '',
     })
+    const [updateLoading, setUpdateLoading] = useState(false)
 
     const { email, password, name, phone, field, city, address, employee, confirmpassword } = empRegisterForm
     const onChangeEmpRegisterForm = (event) =>
@@ -58,6 +59,8 @@ const EmployerRegisterForm = () => {
 
     const empRegister = async (event) => {
         event.preventDefault()
+        setUpdateLoading(true)
+
         if (confirmpassword !== password) {
             setAlert({ type: 'danger', message: 'You must re-enter the correct confirmation password' })
             setTimeout(() => setAlert(null), 10000)
@@ -67,16 +70,16 @@ const EmployerRegisterForm = () => {
                 if (empRegisterData.success) {
                     setAlert({ type: 'success', message: 'Account created successfully!' })
                     setTimeout(() => setAlert(null), 10000)
+                    window.location.replace('/employer/login')
                 } else {
                     setAlert({ type: 'danger', message: empRegisterData.message })
                     setTimeout(() => setAlert(null), 10000)
                 }
-                window.location.replace('/user/login')
-
             } catch (error) {
                 console.log(error)
             }
         }
+        setUpdateLoading(false)
     }
 
     /* if(password !== confirmpassword){
@@ -153,12 +156,12 @@ const EmployerRegisterForm = () => {
                         <Form.Label>Confirm password</Form.Label>
                         <Form.Control type="password" placeholder="" name="confirmpassword" required value={confirmpassword} onChange={onChangeEmpRegisterForm} />
                     </Form.Group>
-                    <Button className="mt-2" variant="success" type="submit">
+                    <Button className="mt-2" variant="success" type="submit" disabled={updateLoading}>
+                        {updateLoading && <span className="spinner-border spinner-border-sm mr-1"></span>}
                         Register
                     </Button>
                 </Form>
                 <p>
-                    {' '}
                     Aready have an account?
                     <Link to="/employer/login">Login</Link>
                 </p>

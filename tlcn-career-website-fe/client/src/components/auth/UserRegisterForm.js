@@ -18,6 +18,7 @@ const UserRegisterForm = () => {
         address: '',
         confirmpassword: '',
     })
+    const [updateLoading, setUpdateLoading] = useState(false)
 
     const { email, password, name, phone, address, confirmpassword } = userRegisterForm
     const onChangeUserRegisterForm = (event) =>
@@ -30,6 +31,7 @@ const UserRegisterForm = () => {
 
     const userRegister = async (event) => {
         event.preventDefault()
+        setUpdateLoading(true)
         if (confirmpassword !== password) {
             setAlert({ type: 'danger', message: 'You must re-enter the correct confirmation password' })
             setTimeout(() => setAlert(null), 10000)
@@ -39,15 +41,16 @@ const UserRegisterForm = () => {
                 if (userResgisterData.success) {
                     setAlert({ type: 'success', message: 'Account created successfully!' })
                     setTimeout(() => setAlert(null), 10000)
+                    window.location.replace('/user/login')
                 } else {
                     setAlert({ type: 'danger', message: userResgisterData.message })
                     setTimeout(() => setAlert(null), 10000)
                 }
-                window.location.replace('/user/login')
             } catch (error) {
                 console.log(error)
             }
         }
+        setUpdateLoading(false)
     }
 
     /* if(password !== confirmpassword){
@@ -92,12 +95,12 @@ const UserRegisterForm = () => {
                         <Form.Label>Confirm password</Form.Label>
                         <Form.Control type="password" placeholder="" name="confirmpassword" required value={confirmpassword} onChange={onChangeUserRegisterForm} />
                     </Form.Group>
-                    <Button className="mt-2" variant="success" type="submit">
+                    <Button className="mt-2" variant="success" type="submit" disabled={updateLoading}>
+                        {updateLoading && <span className="spinner-border spinner-border-sm mr-1"></span>}
                         Register
                     </Button>
                 </Form>
                 <p>
-                    {' '}
                     Aready have an account?
                     <Link to="/user/login">Login</Link>
                 </p>

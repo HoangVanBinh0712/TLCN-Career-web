@@ -102,7 +102,7 @@ const UpdateServiceModal = ({ services, setServices, showUpdateServiceModal, set
                         </Form.Text>
                         <Form.Control type="text" placeholder="VND or USD" name="currency" required value={currency} onChange={onChangeNewPostForm} />
                     </Form.Group>
-                    <label htmlFor="service-status">Status </label>
+                    <label htmlFor="service-status" style={{marginRight: "5px"}}>Status: </label>
                     <select id="service-status" onChange={onChangeNewPostForm}>
                         <option value="true" defaultChecked>
                             active
